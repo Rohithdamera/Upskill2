@@ -32,6 +32,7 @@ public List<Student> GetAll(){
 }
     @GetMapping("/{id}")
     public Student getById(@PathVariable int id){
+    	logger.info("In the getbyid method");
         return  studentService.getStudentById(id);
     }
     @PutMapping("/{id}")
