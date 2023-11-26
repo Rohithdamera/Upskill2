@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Exception.ResourceNotFoundException;
+//import Exception.ResourceNotFoundException;
 import crud.springbootcrud.entity.User;
 import crud.springbootcrud.repository.UserRepository;
 import crud.springbootcrud.service.UserService;
@@ -32,6 +33,12 @@ public class UserController {
 	private static final org.slf4j.Logger LOGGER =LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private UserServiceImpl userservice;
+	
+	
+	
+	  // http://localhost:8080/add
+	
+	
 	@PostMapping("add")
     public User createUser(@RequestBody User user){
         User savedUser = userservice.CreateUser(user);
@@ -39,35 +46,15 @@ public class UserController {
         LOGGER.info("Data inserted successfully");
         return savedUser;
     }
-    // http://localhost:8080/api/users/1
+
 	 @GetMapping("{id}")
-	 public ResponseEntity<User> getUserById(@PathVariable int id) {
-	        try {
-	            Optional<User> user = userservice.getUserById(id);
-	            LOGGER.info("Particular data viewed successfully");
-	            return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-	                    .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
-	        } catch (ResourceNotFoundException ex) {
-	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	        }
+	    public Optional<User> getUserById(@PathVariable int id){
+	        Optional<User> user = userservice.getUserById(id);
+	        LOGGER.info("Particular data viewed successfully");
+	        return user;
 	    }
-
-
-	
-//    @GetMapping("{id}")
-//    public Optional<User> getUserById(@PathVariable int id){
-//      Optional<User> user = userservice.getUserById(id);
-    	// Optional<User> user = userrepository.findById(id).orElseThrow(
-//    	User user= userservice.findById(id).orElseThrow(
-   // 			 ()-> new ResourceNotFoundException("data" id)
-//    			 
-    //			);
-//        LOGGER.info("Particular data viewed successfully");
-//        return user;
-//    }
-
-   
-    // http://localhost:8080/api/users
+	 
+    
     @GetMapping
     public List<User> getAllUsers(){
         List<User> users = userservice.getAllUsers();
@@ -75,50 +62,26 @@ public class UserController {
         return users;
         
     }
+
     @PutMapping("{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
-        try {
-            user.setId(id);
-            User updatedUser = userservice.UpdateUser(user);
-            LOGGER.info(" Data Updated successfully");
-            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-        } catch (ResourceNotFoundException ex) {
-            LOGGER.error("User not found with id: {}", id);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+
+    public User updateUser(@PathVariable int id, @RequestBody User user){
+        user.setId(id);
+        User updatedUser = userservice.UpdateUser(user);
+        LOGGER.info(" Data Updated successfully");
+        return updatedUser;
     }
 
-//     //Build Update User REST API
-//    @PutMapping("{id}")
-////     http://localhost:8080/api/users/1
-//    public User updateUser(@PathVariable int id,
-//                                           @RequestBody User user){
-//        user.setId(id);
-//        User updatedUser = userservice.UpdateUser(user);
-//        LOGGER.info(" Data Updated successfully");
-//        return updatedUser;
-//    }
-
-    // Build Delete User REST API
-//   @DeleteMapping("{id}")
-//    public String deleteUser(@PathVariable int id){
-//        userservice.DeleteUser(id);
-//        LOGGER.info(" Data Deleted  successfully");
-//        return "User successfully deleted!";
-//    }
-//}
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable int id) {
-        try {
-            userservice.DeleteUser(id);
-            LOGGER.info(" Data Deleted  successfully");
-            return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
-        } catch (ResourceNotFoundException ex) {
-            LOGGER.error("User not found with id: {}", id);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+  
+   @DeleteMapping("{id}")
+    public String deleteUser(@PathVariable int id){
+        userservice.DeleteUser(id);
+        LOGGER.info(" Data Deleted  successfully");
+        return "User successfully deleted!";
     }
-}
+
+
+    }
 
 
 

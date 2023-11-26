@@ -14,7 +14,7 @@ class UserTest {
  
 	    @BeforeEach
 	    public void setUp() {
-	        user = new User(1, "John Doe", 25);
+	        user = new User(1, "Rohith", 25);
 	    }
  
 	    @Test
@@ -30,13 +30,13 @@ class UserTest {
  
 	    @Test
 	    public void testGetName() {
-	        assertEquals("John Doe", user.getName());
+	        assertEquals("Rohith", user.getName());
 	    }
  
 	    @Test
 	    public void testSetName() {
-	        user.setName("Jane Doe");
-	        assertEquals("Jane Doe", user.getName());
+	        user.setName("Rohith");
+	        assertEquals("Rohith", user.getName());
 	    }
  
 	    @Test
@@ -52,9 +52,9 @@ class UserTest {
  
 	    @Test
 	    public void testParameterizedConstructor() {
-	        User newUser = new User(3, "Alice", 28);
+	        User newUser = new User(3, "chinna", 28);
 	        assertEquals(3, newUser.getId());
-	        assertEquals("Alice", newUser.getName());
+	        assertEquals("chinna", newUser.getName());
 	        assertEquals(28, newUser.getAge());
 	    }
  
@@ -66,11 +66,16 @@ class UserTest {
 	        assertEquals(0, newUser.getAge());
 	    }
  
-		
+		/*
+		 * @Test public void testEquals() { User newUser1 = new User(1, "John Doe", 25);
+		 * User newUser2 = new User(2, "Ron Doe", 25);
+		 * assertTrue(newUser1.equals(newUser2) && newUser2.equals(newUser1));
+		 * assertTrue(newUser1.hashCode() == newUser2.hashCode()); }
+		 */
 	    
 	    @Test
 	    public void testNotEquals() {
-	        User newUser = new User(2, "Jane Doe", 30);
+	        User newUser = new User(2, "Rohith", 30);
 	        assertFalse(user.equals(newUser) || newUser.equals(user));
 	    }
 }
