@@ -13,12 +13,12 @@ public class StudentTest {
 	private StudentService studentService;
     @Test
     public void testStudent() {
-        Student student = new Student(1, "Rohith", 20, 50000.0);
+        Student student = new Student(1, "Ram", 24, 10000.0);
 
         assertEquals(1, student.getId());
-        assertEquals("Rohith", student.getName());
-        assertEquals(20, student.getAge());
-        assertEquals(50000.0, student.getSalary(), 0.01); 
+        assertEquals("Ram", student.getName());
+        assertEquals(24, student.getAge());
+        assertEquals(10000.0, student.getSalary(), 0.01); 
     }
 
 

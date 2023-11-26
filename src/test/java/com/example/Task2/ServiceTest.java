@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 		@Test
 		public void testGetDetails() {
 			List<Student> list=new ArrayList<>();
-			list.add(new Student(1,"Ram",24,10000));
+			list.add(new Student(1,"Ram",24,10000.0));
 			list.add(new Student(2,"Krishna",24,10000));
 			list.add(new Student(3,"Vishnu",24,10000));
 			list.add(new Student(4,"Sai",24,10000));
